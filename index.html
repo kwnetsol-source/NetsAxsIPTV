@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamX IPTV - Premium IPTV Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0a1628 0%, #1a2f4f 50%, #2a1a3f 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,165,0,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(to right, #fff, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.5em;
+            color: #ffa500;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #aaa;
+            font-size: 1.1em;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px 0;
+        }
+
+        .hero-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,165,0,0.3);
+            border-radius: 10px;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+
+        .hero-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,165,0,0.6);
+        }
+
+        .hero-card img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ffa500;
+            text-shadow: 0 0 20px rgba(255,165,0,0.5);
+        }
+
+        .features {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ffa500;
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            background: rgba(255,165,0,0.1);
+            transform: translateX(10px);
+        }
+
+        .checkmark {
+            font-size: 2em;
+            color: #00ff00;
+            margin-right: 15px;
+        }
+
+        .pricing {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+        }
+
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+.pricing-card {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,165,0,0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,165,0,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .pricing-card:hover::before {
+            left: 100%;
+        }
+
+        .pricing-card:hover {
+            transform: scale(1.05);
+            border-color: #ffa500;
+            box-shadow: 0 10px 40px rgba(255,165,0,0.3);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, rgba(255,165,0,0.2), rgba(255,69,0,0.2));
+            border-color: #ffa500;
+        }
+
+        .plan-name {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #ffa500;
+        }
+
+        .price {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .price span {
+            font-size: 0.5em;
+            color: #aaa;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .plan-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ffa500, #ff6b00);
+            color: #fff;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(255,165,0,0.5);
+        }
+
+        .benefits {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .benefit-card:hover {
+            background: rgba(255,165,0,0.1);
+            transform: translateY(-10px);
+        }
+
+        .benefit-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .devices {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+        }
+
+        .devices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .device-card {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .device-card:hover {
+            border-color: #ffa500;
+            transform: scale(1.05);
+        }
+
+        .device-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+
+        .installation {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .step {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid #ffa500;
+        }
+.step-number {
+            font-size: 2.5em;
+            color: #ffa500;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            text-align: center;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            background: rgba(255,165,0,0.1);
+            transform: scale(1.05);
+        }
+
+        .contact-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: #ffa500;
+            transform: scale(1.2) rotate(360deg);
+        }
+
+        footer {
+            background: #0a0a0a;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,165,0,0.1);
+            padding: 15px 30px;
+            border-radius: 30px;
+            border: 2px solid #ffa500;
+        }
+
+        .lock-icon {
+            font-size: 2em;
+            color: #ffa500;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 22, 40, 0.98);
+            box-shadow: 0 5px 30px rgba(255, 165, 0, 0.3);
+            border-bottom-color: #ffa500;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            background: linear-gradient(to right, #fff, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 10px rgba(255, 165, 0, 0.5));
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #ffa500, #ff6b00);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover {
+            color: #ffa500;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+.nav-cta {
+            background: linear-gradient(135deg, #ffa500, #ff6b00);
+            padding: 10px 25px;
+            border-radius: 25px;
+            transition: all 0.3s;
+            box-shadow: 0 3px 15px rgba(255, 165, 0, 0.3);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 25px rgba(255, 165, 0, 0.5);
+        }
+
+        .nav-cta:hover::before {
+            width: 0;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: #ffa500;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2em;
+            }
+            
+            .tagline {
+                font-size: 1.2em;
+            }
+            
+            .section-title {
+                font-size: 2em;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: rgba(10, 22, 40, 0.98);
+                width: 100%;
+                padding: 30px;
+                gap: 20px;
+                transition: right 0.3s;
+                border-top: 2px solid #ffa500;
+                box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.3em;
+            }
+        }
+
+        .hero {
+            padding-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">StreamX IPTV</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#devices">Devices</a></li>
+                <li><a href="#contact" class="nav-cta">Get Started</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <div class="container">
+            <header>
+                <h1 class="logo">StreamX IPTV</h1>
+                <p class="tagline">Premium IPTV Services</p>
+                <p class="subtitle">High-Quality Streaming for TV, Movies & Live Sports</p>
+            </header>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="checkmark">✓</span>
+                    <div>
+                        <h3>Ultra-Fast & Stable Streaming</h3>
+                        <p>Experience seamless viewing without buffering</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="checkmark">✓</span>
+<div>
+                        <h3>Thousands of Channels Worldwide</h3>
+                        <p>Access content from 150+ countries</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="checkmark">✓</span>
+                    <div>
+                        <h3>HD & 4K Quality Supported</h3>
+                        <p>Crystal clear picture quality</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="checkmark">✓</span>
+                    <div>
+                        <h3>Works on All Devices</h3>
+                        <p>Compatible with all major platforms</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="checkmark">✓</span>
+                    <div>
+                        <h3>Regular Updates & Reliable Support</h3>
+                        <p>24/7 customer assistance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Our Packages</h2>
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3 class="plan-name">Basic</h3>
+                    <div class="price">1.5 KD<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li>10000+ Channels</li>
+                        <li>VOD Included</li>
+                        <li>HD Quality</li>
+                        <li>All Devices</li>
+                    </ul>
+                    <button class="btn">Get Started</button>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3 class="plan-name">Standard</h3>
+                    <div class="price">4 KD<span>/3 months</span></div>
+                    <ul class="plan-features">
+                        <li>10000+ Channels</li>
+                        <li>VOD Included</li>
+                        <li>HD & 4K Quality</li>
+                        <li>All Devices</li>
+                    </ul>
+                    <button class="btn">Get Started</button>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <h3 class="plan-name">Premium</h3>
+                    <div class="price">7 KD<span>/6 months</span></div>
+                    <ul class="plan-features">
+                        <li>10000+ Channels</li>
+                        <li>VOD Included</li>
+                        <li>HD & 4K Quality</li>
+                        <li>Priority Support</li>
+                    </ul>
+                    <button class="btn">Get Started</button>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3 class="plan-name">Annual</h3>
+                    <div class="price">12 KD<span>/12 months</span></div>
+                    <ul class="plan-features">
+                        <li>10000+ Channels</li>
+                        <li>VOD Included</li>
+                        <li>HD & 4K Quality</li>
+                        <li>Best Value!</li>
+                    </ul>
+                    <button class="btn">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">What You Get</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📺</div>
+<h3>Live TV from 150+ Countries</h3>
+                    <p>Watch your favorite channels from around the world</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎬</div>
+                    <h3>Movies & Series Library</h3>
+                    <p>Unlimited access to thousands of titles</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📅</div>
+                    <h3>Catch-Up & EPG Guide</h3>
+                    <p>Never miss your favorite shows</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔄</div>
+                    <h3>Multiple Connections</h3>
+                    <p>Watch on multiple devices simultaneously</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Devices Section -->
+    <section class="devices" id="devices">
+        <div class="container">
+            <h2 class="section-title">Devices Supported</h2>
+            <div class="devices-grid">
+                <div class="device-card">
+                    <div class="device-icon">📱</div>
+                    <h3>Smart TVs</h3>
+                    <p>Samsung, LG, Android TV</p>
+                </div>
+                <div class="device-card">
+                    <div class="device-icon">📦</div>
+                    <h3>Android TV Boxes</h3>
+                    <p>All Android boxes supported</p>
+                </div>
+                <div class="device-card">
+                    <div class="device-icon">🎮</div>
+                    <h3>MAG & Enigma2 Boxes</h3>
+                    <p>Professional set-top boxes</p>
+                </div>
+                <div class="device-card">
+                    <div class="device-icon">💻</div>
+                    <h3>iOS & Android Devices</h3>
+                    <p>Phones and tablets</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section class="installation">
+        <div class="container">
+            <h2 class="section-title">Installation is Easy!</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Choose Your Plan</h3>
+                    <p>Select the package that best suits your needs</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Provide Your Device</h3>
+                    <p>Tell us what device you'll be using</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Receive Login & Guide</h3>
+                    <p>Get your credentials and setup instructions</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Start Watching Instantly</h3>
+                    <p>Enjoy unlimited entertainment right away</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-methods">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p>support@streamxiptv.com</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3>WhatsApp</h3>
+                    <p>+965-1234-5678</p>
+                </div>
+<div class="contact-card">
+                    <div class="contact-icon">🌐</div>
+                    <h3>Website</h3>
+                    <p>www.streamxiptv.com</p>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <div class="social-icon">f</div>
+                <div class="social-icon">📷</div>
+                <div class="social-icon">🐦</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-badge">
+                <span class="lock-icon">🔒</span>
+                <div>
+                    <strong>Safe & Legal</strong> • 100% Compliant Service
+                </div>
+            </div>
+            <p style="margin-top: 20px; color: #666;">© 2026 StreamX IPTV. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    
+                    const offsetTop = target.offsetTop - 70;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navbar.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
